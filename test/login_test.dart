@@ -24,7 +24,6 @@ class AuthenticationService {
         return false;
       }
     } catch (e) {
-      // Handle exceptions
       return false;
     }
   }
