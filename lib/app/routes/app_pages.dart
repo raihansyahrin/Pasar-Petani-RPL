@@ -4,6 +4,8 @@ import '../modules/add_product/bindings/add_product_binding.dart';
 import '../modules/add_product/views/add_product_view.dart';
 import '../modules/bottom_navigation_bar/bindings/bottom_navigation_bar_binding.dart';
 import '../modules/bottom_navigation_bar/views/bottom_navigation_bar_view.dart';
+import '../modules/change_password/bindings/change_password_binding.dart';
+import '../modules/change_password/views/change_password_view.dart';
 import '../modules/change_profile/bindings/change_profile_binding.dart';
 import '../modules/change_profile/views/change_profile_view.dart';
 import '../modules/detail_permintaan/bindings/detail_permintaan_binding.dart';
@@ -87,6 +89,11 @@ class AppPages {
       name: _Paths.DETAIL_PERMINTAAN,
       page: () => const DetailPermintaanView(),
       binding: DetailPermintaanBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

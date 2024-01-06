@@ -16,6 +16,7 @@ abstract class Routes {
   static const RIWAYAT_PENDAPATAN_UANG = _Paths.RIWAYAT_PENDAPATAN_UANG;
   static const ADD_PRODUCT = _Paths.ADD_PRODUCT;
   static const DETAIL_PERMINTAAN = _Paths.DETAIL_PERMINTAAN;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const RIWAYAT_PENDAPATAN_UANG = '/riwayat-pendapatan-uang';
   static const ADD_PRODUCT = '/add-product';
   static const DETAIL_PERMINTAAN = '/detail-permintaan';
+  static const CHANGE_PASSWORD = '/change-password';
 }
