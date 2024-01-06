@@ -8,13 +8,15 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await initializeDateFormatting('id_ID', null).then((_) => runApp(
-        GetMaterialApp(
-          title: "Application",
-          initialRoute: AppPages.INITIAL,
-          theme: themeData,
-          getPages: AppPages.routes,
-        ),
-      ));
-} 
+
+  await initializeDateFormatting('id_ID', null).then(
+    (_) => runApp(
+      GetMaterialApp(
+        title: "Application",
+        initialRoute: AppPages.INITIAL,
+        theme: themeData,
+        getPages: AppPages.routes,
+      ),
+    ),
+  );
+}
