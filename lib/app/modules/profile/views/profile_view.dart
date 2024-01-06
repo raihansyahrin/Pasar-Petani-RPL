@@ -32,6 +32,7 @@ class ProfileView extends GetView<ProfileController> {
                     name: controller.user?.nama ?? "",
                     profile: controller.user?.fotoUrl ?? "",
                     email: controller.user?.email ?? "",
+                    onPressed: () => Get.toNamed(Routes.CHANGE_PROFILE),
                   ),
                 ),
                 Container(
@@ -61,7 +62,9 @@ class ProfileView extends GetView<ProfileController> {
                       ProfileListTile(
                         title: "Keamanan",
                         subtitle: "Ubah Password",
-                        onTap: () => Get.toNamed(Routes.CHANGE_PROFILE),
+                        onTap: () => Get.toNamed(
+                          Routes.CHANGE_PASSWORD,
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
@@ -108,7 +111,6 @@ class ProfileView extends GetView<ProfileController> {
                                     height: 44,
                                     child: ElevatedButton(
                                       onPressed: () {
-
                                         controller.logout();
                                       },
                                       child: const Text('Ya'),
@@ -131,7 +133,6 @@ class ProfileView extends GetView<ProfileController> {
                               ),
                             ),
                           );
-                        
                         },
                         child: SizedBox(
                           width: double.infinity,
