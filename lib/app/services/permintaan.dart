@@ -71,6 +71,7 @@ class PermintaanService {
       final response = await request.send();
 
       if (response.statusCode == 201) {
+        print(response.stream.toBytes());
         return true;
       }
       return false;

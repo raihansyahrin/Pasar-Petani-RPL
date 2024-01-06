@@ -18,6 +18,7 @@ class AuthenticationService {
         storage.write('token', json.decode(response.body)['access_token']);
         return true;
       }
+      print(response.body);
       return false;
     } catch (e) {
       return throw Exception(e);

@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:pasar_petani/app/constant/constanta.dart';
 import 'package:pasar_petani/app/data/model/saldo.dart';
 
+import '../data/model/history_saldo.dart';
+
 class SaldoService {
   Future<Saldo?> fetchSaldo() async {
     try {
@@ -18,8 +20,7 @@ class SaldoService {
     }
   }
 
-  Future<bool> penarikan(
-      {required int idUang, required String nominal}) async {
+  Future<bool> penarikan({required int idUang, required String nominal}) async {
     try {
       var url = Uri.parse("$apiUrl/saldo/tarik/$idUang");
       GetStorage storage = GetStorage();
@@ -35,6 +36,27 @@ class SaldoService {
       return false;
     } catch (e) {
       return throw Exception(e);
+    }
+  }
+
+  Future<List<HistorySaldo>> getHistorySaldo() async {
+    try {
+      Uri uri = Uri.parse('$apiUrl/saldo');
+      GetStorage storage = GetStorage();
+      http.Response response = await http.get(uri,
+          headers: {'Authorization': 'Bearer ${storage.read("token")}'});
+      if (response.statusCode == 200) {
+        List? data =
+            (json.decode(response.body))[0]['history'];
+        if (data == null || data.isEmpty) {
+          return [];
+        } else {
+          return data.map((e) => HistorySaldo.fromJson(e)).toList();
+        }
+      }
+      return [];
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }
