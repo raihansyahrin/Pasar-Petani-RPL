@@ -18,6 +18,7 @@ class BottomNavigationBarView extends GetView<BottomNavigationBarController> {
     Get.put(ProfileController());
     ProductController permintaan = Get.put(ProductController());
     Get.put(RiwayatController());
+    Get.put(BottomNavigationBarController(), permanent: true);
 
     return GetBuilder<BottomNavigationBarController>(builder: (_) {
       return Scaffold(
