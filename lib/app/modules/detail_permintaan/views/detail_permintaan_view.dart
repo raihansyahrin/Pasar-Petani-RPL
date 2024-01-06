@@ -193,96 +193,96 @@ class DetailPermintaanView extends GetView<DetailPermintaanController> {
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: FixedTimeline.tileBuilder(
-                                theme: TimelineThemeData(
-                                  nodePosition: 0,
-                                  color: const Color(0xff989898),
-                                  indicatorTheme: const IndicatorThemeData(
-                                    position: 0,
-                                    size: 20.0,
-                                  ),
-                                  connectorTheme: const ConnectorThemeData(
-                                    thickness: 2.5,
-                                  ),
+                            SingleChildScrollView(
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 16,
                                 ),
-                                builder: TimelineTileBuilder.connected(
-                                  connectionDirection:
-                                      ConnectionDirection.before,
-                                  itemCount: controller
-                                          .detailPermintaan?.status?.length ??
-                                      0,
-                                  contentsBuilder: (context, index) {
-                                    final status = controller
-                                        .detailPermintaan?.status?[index];
-                                    
-
-
-                                    return Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ListTile(
-                                            title: Text(
-                                              DateFormat("d MMM yyyy", "id_ID")
-                                                  .format(
-                                                status?.tglPerubahan ??
-                                                    DateTime.now(),
+                                child: FixedTimeline.tileBuilder(
+                                  theme: TimelineThemeData(
+                                    nodePosition: 0,
+                                    color: const Color(0xff989898),
+                                    indicatorTheme: const IndicatorThemeData(
+                                      position: 0,
+                                      size: 20.0,
+                                    ),
+                                    connectorTheme: const ConnectorThemeData(
+                                      thickness: 2.5,
+                                    ),
+                                  ),
+                                  builder: TimelineTileBuilder.connected(
+                                    connectionDirection:
+                                        ConnectionDirection.before,
+                                    itemCount: controller
+                                            .detailPermintaan?.status?.length ??
+                                        0,
+                                    contentsBuilder: (context, index) {
+                                      final status = controller
+                                          .detailPermintaan?.status?[index];
+                            
+                                      return Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ListTile(
+                                              title: Text(
+                                                DateFormat("d MMM yyyy", "id_ID")
+                                                    .format(
+                                                  status?.tglPerubahan ??
+                                                      DateTime.now(),
+                                                ),
+                                              ),
+                                              subtitle: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text("${status?.status}"),
+                                                  Text("${status?.keterangan}"),
+                                                ],
+                                              ),
+                                              trailing: Text(
+                                                DateFormat("h:mm", "id_ID")
+                                                    .format(
+                                                  status?.tglPerubahan ??
+                                                      DateTime.now(),
+                                                ),
                                               ),
                                             ),
-                                            subtitle: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("${status?.status}"),
-                                                Text("${status?.keterangan}"),
-                                              ],
-                                            ),
-                                            trailing: Text(
-                                              DateFormat("h:mm", "id_ID")
-                                                  .format(
-                                                status?.tglPerubahan ??
-                                                    DateTime.now(),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  indicatorBuilder: (context, index) {
-                                    final isLatest = index == 0;
-                                    // Determine indicator based on the index
-                                    if (isLatest) {
-                                      // Checklist at the first edge for the latest status
-                                      return DotIndicator(
-                                        color: primaryColor,
-                                        child: const Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                          size: 12.0,
+                                            const SizedBox(height: 10),
+                                          ],
                                         ),
                                       );
-                                    } else {
-                                      // Outlined indicator for other items
-                                      return const OutlinedDotIndicator(
-                                        borderWidth: 2.5,
-                                      );
-                                    }
-                                  },
-                                  connectorBuilder: (_, index, ___) =>
-                                      DashedLineConnector(
-                                    // Color for the connector based on whether it's the last item
-                                    color: index == 0
-                                        ? const Color(0xff66c97f)
-                                        : null,
+                                    },
+                                    indicatorBuilder: (context, index) {
+                                      final isLatest = index == 0;
+                                      // Determine indicator based on the index
+                                      if (isLatest) {
+                                        // Checklist at the first edge for the latest status
+                                        return DotIndicator(
+                                          color: primaryColor,
+                                          child: const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 12.0,
+                                          ),
+                                        );
+                                      } else {
+                                        // Outlined indicator for other items
+                                        return const OutlinedDotIndicator(
+                                          borderWidth: 2.5,
+                                        );
+                                      }
+                                    },
+                                    connectorBuilder: (_, index, ___) =>
+                                        DashedLineConnector(
+                                      // Color for the connector based on whether it's the last item
+                                      color: index == 0
+                                          ? const Color(0xff66c97f)
+                                          : null,
+                                    ),
                                   ),
                                 ),
                               ),
