@@ -108,6 +108,7 @@ class RiwayatView extends GetView<RiwayatController> {
                   ),
                 ),
         );
+      
       },
     );
   }
