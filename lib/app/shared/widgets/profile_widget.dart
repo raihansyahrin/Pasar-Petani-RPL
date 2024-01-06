@@ -51,10 +51,13 @@ class ProfileWidget extends StatelessWidget {
             ],
           ),
         ),
-        Image.asset(
-          'assets/img/brush.png',
-          width: 24,
-          height: 24,
+        GestureDetector(
+          onTap: onPressed,
+          child: Image.asset(
+            'assets/img/brush.png',
+            width: 24,
+            height: 24,
+          ),
         ),
       ],
     );

@@ -50,22 +50,25 @@ void main() {
               .login(email: "azisa6082@gmail.com", password: "123456789"),
           true);
     });
-  });
-  test("returns false if the login is unsuccessful", () async {
-    final client = MockClient();
-    when(
-      client.post(
-        Uri.parse('$apiUrl/login'),
-        body: {'email': 'invalid@example.com', 'password': 'invalid_password'},
-      ),
-    ).thenAnswer(
-      (_) async => http.Response('Invalid credentials', 401),
-    );
+    test("returns false if the login is unsuccessful", () async {
+      final client = MockClient();
+      when(
+        client.post(
+          Uri.parse('$apiUrl/login'),
+          body: {
+            'email': 'invalid@example.com',
+            'password': 'invalid_password'
+          },
+        ),
+      ).thenAnswer(
+        (_) async => http.Response('Invalid credentials', 401),
+      );
 
-    expect(
-      await AuthenticationService(client: client)
-          .login(email: 'invalid@example.com', password: 'invalid_password'),
-      false,
-    );
+      expect(
+        await AuthenticationService(client: client)
+            .login(email: 'invalid@example.com', password: 'invalid_password'),
+        false,
+      );
+    });
   });
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../helpers/concurrency_format.dart';
+import '../../routes/app_pages.dart';
 import '../theme/color.dart';
 import '../theme/font.dart';
 
@@ -38,10 +40,15 @@ class CardSalary extends StatelessWidget {
                         : "Belum ada"
                     : "",
                 style: bodyRegular),
-            trailing: Text(
-              'Lihat Riwayat',
-              style: body2Regular.copyWith(
-                color: primaryColor,
+            trailing: GestureDetector(
+              onTap: () => Get.toNamed(
+                Routes.RIWAYAT_PENDAPATAN_UANG,
+              ),
+              child: Text(
+                'Lihat Riwayat',
+                style: body2Regular.copyWith(
+                  color: primaryColor,
+                ),
               ),
             ),
           ),
