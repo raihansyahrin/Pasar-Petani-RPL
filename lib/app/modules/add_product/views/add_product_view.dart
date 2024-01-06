@@ -31,12 +31,12 @@ class AddProductView extends GetView<AddProductController> {
                   'Foto Produk',
                   style: h5Bold,
                 ),
-                controller.file == null
-                    ? EmptyImage(onTap: controller.getImage)
-                    : FillImage(
-                        onTap: controller.getImage,
-                        file: controller.file,
-                      ),
+              controller.file == null
+                  ? EmptyImage(onTap: controller.getImage)
+                  : FillImage(
+                      onTap: controller.getImage,
+                      file: controller.file,
+                    ),
                 const SizedBox(
                   height: 8,
                 ),
