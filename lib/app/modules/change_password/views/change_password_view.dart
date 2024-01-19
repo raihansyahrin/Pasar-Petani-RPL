@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../shared/theme/color.dart';
 import '../../../shared/theme/font.dart';
-import '../../bottom_navigation_bar/controllers/bottom_navigation_bar_controller.dart';
 import '../controllers/change_password_controller.dart';
 
 class ChangePasswordView extends GetView<ChangePasswordController> {
