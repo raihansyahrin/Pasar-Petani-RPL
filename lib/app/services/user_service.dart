@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:pasar_petani/app/constant/constanta.dart';
-import 'package:pasar_petani/app/data/model/history_saldo.dart';
 import '../data/model/user.dart';
 
 class UserService {
