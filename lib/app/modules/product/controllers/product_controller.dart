@@ -19,13 +19,16 @@ class ProductController extends GetxController {
   void fetchAllPermintaan() async {
     listProduct = await PermintaanService().getAllPermintaan();
     filteredList = List.from(listProduct); // Initialize filtered list
+
+    update();
     isLoading = false;
     update();
   }
 
   void filterList(String query) {
     if (query.isEmpty) {
-      filteredList = List.from(listProduct); // Reset to full list if query is empty
+      filteredList =
+          List.from(listProduct); // Reset to full list if query is empty
     } else {
       filteredList = listProduct
           .where((product) =>

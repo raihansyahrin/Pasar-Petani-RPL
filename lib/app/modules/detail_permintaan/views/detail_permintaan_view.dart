@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:pasar_petani/app/helpers/concurrency_format.dart';
 import 'package:pasar_petani/app/shared/theme/color.dart';
 import 'package:pasar_petani/app/shared/theme/font.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:timelines/timelines.dart';
 
 import '../controllers/detail_permintaan_controller.dart';
@@ -43,6 +44,42 @@ class DetailPermintaanView extends GetView<DetailPermintaanController> {
                           child: Image.network(
                             '${controller.foto}',
                             fit: BoxFit.fitHeight,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return Shimmer.fromColors(
+                                  baseColor:
+                                      const Color.fromARGB(255, 148, 148, 148),
+                                  highlightColor:
+                                      const Color.fromARGB(255, 102, 95, 95),
+                                  child: Container(
+                                    // height: 120,
+                                    // width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                // height: 120,
+                                // width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  // borderRadius: BorderRadius.vertical(
+                                  //   top: Radius.circular(16),
+                                  // ),
+                                  color: Colors.grey,
+                                ),
+                                child: const Icon(
+                                  Icons.image_not_supported,
+                                  size: 100,
+                                  color: Color.fromARGB(255, 53, 53, 53),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -219,9 +256,10 @@ class DetailPermintaanView extends GetView<DetailPermintaanController> {
                                     contentsBuilder: (context, index) {
                                       final status = controller
                                           .detailPermintaan?.status?[index];
-                            
+
                                       return Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -229,7 +267,8 @@ class DetailPermintaanView extends GetView<DetailPermintaanController> {
                                           children: [
                                             ListTile(
                                               title: Text(
-                                                DateFormat("d MMM yyyy", "id_ID")
+                                                DateFormat(
+                                                        "d MMM yyyy", "id_ID")
                                                     .format(
                                                   status?.tglPerubahan ??
                                                       DateTime.now(),

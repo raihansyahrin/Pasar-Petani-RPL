@@ -3,6 +3,7 @@ import 'package:pasar_petani/app/shared/theme/color.dart';
 import 'package:pasar_petani/app/shared/theme/font.dart';
 
 ThemeData themeData = ThemeData(
+  useMaterial3: false,
   appBarTheme: AppBarTheme(
     backgroundColor: secondaryShade3,
   ),

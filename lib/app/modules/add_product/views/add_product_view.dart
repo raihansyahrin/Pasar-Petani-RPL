@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pasar_petani/app/shared/theme/font.dart';
-
 import '../../../shared/theme/color.dart';
 import '../controllers/add_product_controller.dart';
 
@@ -13,83 +11,103 @@ class AddProductView extends GetView<AddProductController> {
   const AddProductView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddProductController>(builder: (context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Kirim Permintaan'),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Container(
+    return GetBuilder<AddProductController>(
+      init: AddProductController(),
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Kirim Permintaan'),
+            centerTitle: true,
+          ),
+          body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    'Foto Produk',
+                    style: h5Bold,
+                  ),
+                  controller.file == null
+                      ? EmptyImage(onTap: controller.getImage)
+                      : FillImage(
+                          onTap: controller.getImage,
+                          file: controller.file,
+                        ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  FormTile(
+                    title: "Nama Produk",
+                    controller: controller.name,
+                    keyboardType: TextInputType.name,
+                  ),
+                  FormTile(
+                    title: "Description",
+                    controller: controller.description,
+                    keyboardType: TextInputType.name,
+                  ),
+                  FormTile(
+                    title: "Kategori",
+                    controller: controller.category,
+                    keyboardType: TextInputType.name,
+                  ),
+                  FormTile(
+                    title: "Harga",
+                    controller: controller.price,
+                    keyboardType: TextInputType.number,
+                  ),
+                  FormTile(
+                    title: "Jumlah",
+                    controller: controller.jumlah,
+                    keyboardType: TextInputType.number,
+                  ),
+                  FormTile(
+                    title: "Durasi Tahan (Hari)",
+                    controller: controller.duration,
+                    keyboardType: TextInputType.number,
+                  ),
+                  FormTile(
+                    title: "Berat (Kg)",
+                    controller: controller.weight,
+                    keyboardType: TextInputType.number,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: Container(
+            height: 40,
             margin: const EdgeInsets.symmetric(
               horizontal: 16,
+              vertical: 32,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Foto Produk',
-                  style: h5Bold,
-                ),
-              controller.file == null
-                  ? EmptyImage(onTap: controller.getImage)
-                  : FillImage(
-                      onTap: controller.getImage,
-                      file: controller.file,
+            child: ElevatedButton(
+              onPressed: controller.product,
+              child: controller.isLoading
+                  ? const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : const Text(
+                      'Kirim',
                     ),
-                const SizedBox(
-                  height: 8,
-                ),
-                FormTile(
-                  title: "Nama Produk",
-                  controller: controller.name,
-                  keyboardType: TextInputType.name,
-                ),
-                FormTile(
-                  title: "Description",
-                  controller: controller.description,
-                  keyboardType: TextInputType.name,
-                ),
-                FormTile(
-                  title: "Kategori",
-                  controller: controller.category,
-                  keyboardType: TextInputType.name,
-                ),
-                FormTile(
-                  title: "Harga",
-                  controller: controller.price,
-                  keyboardType: TextInputType.number,
-                ),
-                FormTile(
-                  title: "Jumlah",
-                  controller: controller.jumlah,
-                  keyboardType: TextInputType.number,
-                ),
-                FormTile(
-                  title: "Durasi Tahan",
-                  controller: controller.duration,
-                ),
-                FormTile(
-                  title: "Berat",
-                  controller: controller.weight,
-                  keyboardType: TextInputType.number,
-                ),
-              ],
             ),
           ),
-        ),
-        bottomNavigationBar: Container(
-          height: 40,
-          margin: const EdgeInsets.all(16),
-          child: ElevatedButton(
-            onPressed: controller.product,
-            child: const Text(
-              'Kirim',
-            ),
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -114,6 +132,17 @@ class EmptyImage extends StatelessWidget {
             5,
           ),
           color: whiteColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(
+                0,
+                3,
+              ),
+            ),
+          ],
         ),
         child: Center(
           child: Image.asset(

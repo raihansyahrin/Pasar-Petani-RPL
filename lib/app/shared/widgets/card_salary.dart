@@ -7,11 +7,11 @@ import '../theme/color.dart';
 import '../theme/font.dart';
 
 class CardSalary extends StatelessWidget {
-  final String? salary;
+  final int? salary;
   final void Function()? onPressed;
   const CardSalary({
     super.key,
-    this.salary = "",
+    this.salary = 0,
     required this.onPressed,
   });
 
@@ -23,6 +23,17 @@ class CardSalary extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: whiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(
+              0,
+              3,
+            ),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,20 +43,35 @@ class CardSalary extends StatelessWidget {
               'Pendapatan',
               style: bodyBold,
             ),
+            // subtitle: Text(
+            //   salary != null
+            //       ? double.parse(salary ?? "0.0") > 0
+            //           ? CurrencyFormat.convertToIdr(
+            //               double.parse(salary ?? "0.0"), 2)
+            //           : "Belum ada"
+            //       : "",
+            //   style: bodyRegular,
+            // ),
             subtitle: Text(
-                salary != null
-                    ? double.parse(salary ?? "0") > 0
-                        ? CurrencyFormat.convertToIdr(
-                            double.parse(salary ?? "0"), 2)
-                        : "Belum ada"
-                    : "",
-                style: bodyRegular),
+              salary != null
+                  ? CurrencyFormat.formatCurrency(salary!)
+                  : "Belum ada",
+              style: bodyRegular,
+            ),
+            // subtitle: Text(
+            //   salary != null && double.parse(salary!) > 0
+            //       ? CurrencyFormat.convertToIdr(double.parse(salary!), 2)
+            //       : "Belum ada",
+            //   style: bodyRegular,
+            // ),
+
             trailing: GestureDetector(
               onTap: () => Get.toNamed(
                 Routes.RIWAYAT_PENDAPATAN_UANG,
               ),
               child: Text(
-                'Lihat Riwayat',
+                textAlign: TextAlign.center,
+                'Lihat Riwayat\nPendapatan',
                 style: body2Regular.copyWith(
                   color: primaryColor,
                 ),
@@ -56,7 +82,7 @@ class CardSalary extends StatelessWidget {
             height: 44,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: onPressed,
+              onPressed: salary == null ? onPressed : null,
               child: Text(
                 'Tarik Pendapatan',
                 style: buttonLinkLRegular.copyWith(

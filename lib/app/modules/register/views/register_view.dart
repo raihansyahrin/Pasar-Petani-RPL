@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:pasar_petani/app/routes/app_pages.dart';
@@ -21,9 +22,10 @@ class RegisterView extends GetView<RegisterController> {
               'assets/img/bottom.png',
             ),
           ),
-          Form(
-            key: controller.formKey,
-            child: SingleChildScrollView(
+          SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Form(
+              key: controller.formKey,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 16,

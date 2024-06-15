@@ -21,9 +21,9 @@ class HomeController extends GetxController {
   String? validasi(String? value) {
     if (value!.isEmpty) {
       return "Tolong di isi terlebih dahulu";
-    } else if (int.parse(value) > int.parse(saldo!.saldo!)) {
+    } else if (int.parse(value) > int.parse(saldo!.saldo.toString())) {
       return "Uang anda tidak cukup ";
-    }else if(int.parse(value) == 0) {
+    } else if (int.parse(value) == 0) {
       return "Uang anda kosong mohon menunggu pendapatan anda";
     }
     return null;
@@ -107,7 +107,8 @@ class HomeController extends GetxController {
     }
     update();
   }
-  void fetchStatistic() async{
+
+  void fetchStatistic() async {
     statistik = await PermintaanService().getStatistic();
     isLoading = false;
     update();

@@ -17,6 +17,7 @@ abstract class Routes {
   static const ADD_PRODUCT = _Paths.ADD_PRODUCT;
   static const DETAIL_PERMINTAAN = _Paths.DETAIL_PERMINTAAN;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const CHAT_WITH_AI = _Paths.CHAT_WITH_AI;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const ADD_PRODUCT = '/add-product';
   static const DETAIL_PERMINTAAN = '/detail-permintaan';
   static const CHANGE_PASSWORD = '/change-password';
+  static const CHAT_WITH_AI = '/chat-with-ai';
 }

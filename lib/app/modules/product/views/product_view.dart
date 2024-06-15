@@ -1,8 +1,11 @@
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'package:pasar_petani/app/shared/theme/color.dart';
 import 'package:pasar_petani/app/shared/theme/font.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/product_controller.dart';
@@ -15,14 +18,20 @@ class ProductView extends GetView<ProductController> {
     return GetBuilder<ProductController>(
       init: ProductController(),
       builder: (_) {
-        return SafeArea(
+        return ColorfulSafeArea(
+          color: secondaryShade3,
           child: controller.isLoading
-              ? const Material(
-                  child: Center(child: CircularProgressIndicator()),
+              ? Material(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                      color: secondaryColor,
+                    ),
+                  ),
                 )
               : Scaffold(
                   appBar: PreferredSize(
-                    preferredSize: const Size(double.infinity, 150),
+                    preferredSize: const Size(double.infinity, 130),
                     child: Container(
                       color: secondaryShade3,
                       padding: const EdgeInsets.symmetric(
@@ -30,6 +39,7 @@ class ProductView extends GetView<ProductController> {
                         vertical: 8,
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,13 +50,6 @@ class ProductView extends GetView<ProductController> {
                                   color: whiteColor,
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.menu,
-                                  color: whiteColor,
-                                ),
-                              )
                             ],
                           ),
                           const SizedBox(
@@ -58,6 +61,8 @@ class ProductView extends GetView<ProductController> {
                               controller.filterList(query);
                             },
                             decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 0.0, horizontal: 10.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: InputBorder.none,
@@ -97,6 +102,8 @@ class ProductView extends GetView<ProductController> {
                     ),
                   ),
                   body: RefreshIndicator(
+                    backgroundColor: Colors.white,
+                    color: secondaryColor,
                     onRefresh: () async {
                       controller.fetchAllPermintaan();
                     },
@@ -118,15 +125,21 @@ class ProductView extends GetView<ProductController> {
                                 primary: false,
                                 shrinkWrap: true,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  crossAxisSpacing: 8.0,
-                                  mainAxisSpacing: 8.0,
-                                  childAspectRatio: 0.75,
+                                  crossAxisSpacing: 12.0,
+                                  mainAxisSpacing: 12.0,
+                                  childAspectRatio:
+                                      MediaQuery.of(context).size.width /
+                                          (MediaQuery.of(context).size.height /
+                                              1.7),
                                 ),
                                 itemCount: controller.filteredList.length,
                                 itemBuilder: (context, index) {
-                                  var data = controller.filteredList[index];
+                                  // var data = controller.filteredList[index];
+                                  var data = controller.filteredList.reversed
+                                      .toList()[index];
+
                                   return GestureDetector(
                                     onTap: () {
                                       Get.toNamed(
@@ -143,6 +156,17 @@ class ProductView extends GetView<ProductController> {
                                           16,
                                         ),
                                         color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                            offset: const Offset(
+                                              0,
+                                              3,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
@@ -162,6 +186,61 @@ class ProductView extends GetView<ProductController> {
                                               child: Image.network(
                                                 data.fotoUrl ?? "",
                                                 height: 120,
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  } else {
+                                                    return Shimmer.fromColors(
+                                                      baseColor:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              148,
+                                                              148,
+                                                              148),
+                                                      highlightColor:
+                                                          const Color.fromARGB(
+                                                              255, 102, 95, 95),
+                                                      child: Container(
+                                                        height: 120,
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .vertical(
+                                                            top:
+                                                                Radius.circular(
+                                                                    16),
+                                                          ),
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
+                                                  return Container(
+                                                    height: 120,
+                                                    width: double.infinity,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
+                                                        top:
+                                                            Radius.circular(16),
+                                                      ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.image_not_supported,
+                                                      size: 60,
+                                                      color: Color.fromARGB(
+                                                          255, 53, 53, 53),
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ),
                                           ),
@@ -209,29 +288,46 @@ class ProductView extends GetView<ProductController> {
                                                                 : primaryShade4,
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      ElevatedButton(
-                                                        onPressed: () {
-                                                          Get.toNamed(
-                                                            Routes
-                                                                .DETAIL_PERMINTAAN,
-                                                            arguments:{
-                                                              "id" : data.id,
-                                                              "image" : data.fotoUrl,
-                                                            }
-                                                          );
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () => Get.toNamed(
+                                                        Routes
+                                                            .DETAIL_PERMINTAAN,
+                                                        arguments: {
+                                                          "id": data.id,
+                                                          "image": data.fotoUrl,
                                                         },
+                                                      ),
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                          vertical: 6,
+                                                          horizontal: 18,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                              0xFF74DA74),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(3),
+                                                        ),
                                                         child: const Text(
                                                           'Detail',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
