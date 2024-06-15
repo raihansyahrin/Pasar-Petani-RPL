@@ -9,7 +9,7 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DotEnv().load();
+  await dotenv.load(fileName: '.env');
 
   await initializeDateFormatting('id_ID', null).then(
     (_) => runApp(
