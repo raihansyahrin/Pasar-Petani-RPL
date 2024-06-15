@@ -16,6 +16,7 @@ void main() async {
         initialRoute: AppPages.INITIAL,
         theme: themeData,
         getPages: AppPages.routes,
+        debugShowCheckedModeBanner: false,
       ),
     ),
   );
