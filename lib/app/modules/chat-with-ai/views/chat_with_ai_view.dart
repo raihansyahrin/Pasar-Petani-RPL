@@ -1,35 +1,8 @@
-// import 'package:flutter/material.dart';
-
-// import 'package:get/get.dart';
-
-// import '../controllers/chat_with_ai_controller.dart';
-
-// class ChatWithAiView extends GetView<ChatWithAiController> {
-//   const ChatWithAiView({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('ChatWithAiView'),
-//         centerTitle: true,
-//       ),
-//       body: const Center(
-//         child: Text(
-//           'ChatWithAiView is working',
-//           style: TextStyle(fontSize: 20),
-//         ),
-//       ),
-//     );
-//   }
-// }
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:pasar_petani/app/modules/chat-with-ai/widgets/chat_bubble.dart';
 import 'package:pasar_petani/app/shared/theme/color.dart';
-
-// const apiKey = 'AIzaSyAsM7WdFtuMOhvwuODMOUrtFBq2dXIFl1M';
-const apiKey = 'AIzaSyC698r7KQ3aL3s7QW2uQBk-6Vy1gmSYo24';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -39,7 +12,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+  final model =
+      GenerativeModel(model: 'gemini-pro', apiKey: dotenv.env['API_KEY']!);
   TextEditingController messageController = TextEditingController();
 
   // final prompt = 'Write a story about a magic backpack.';
