@@ -11,8 +11,7 @@ String historySaldoToJson(HistorySaldo data) => json.encode(data.toJson());
 class HistorySaldo {
     int? id;
     String? idUang;
-    String? nominalPenarikan;
-    String? nominalPengiriman;
+    String? nominal;
     DateTime? waktuPengiriman;
     DateTime? createdAt;
     DateTime? updatedAt;
@@ -21,8 +20,7 @@ class HistorySaldo {
     HistorySaldo({
         this.id,
         this.idUang,
-        this.nominalPenarikan,
-        this.nominalPengiriman,
+        this.nominal,
         this.waktuPengiriman,
         this.createdAt,
         this.updatedAt,
@@ -32,8 +30,8 @@ class HistorySaldo {
     factory HistorySaldo.fromJson(Map<String, dynamic> json) => HistorySaldo(
         id: json["id"],
         idUang: json["id_uang"],
-        nominalPenarikan: json["nominal_penarikan"],
-        nominalPengiriman: json["nominal_pengiriman"],
+        nominal: json["nominal"],
+        
         waktuPengiriman: json["waktu_pengiriman"] == null ? null : DateTime.parse(json["waktu_pengiriman"]),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -43,8 +41,7 @@ class HistorySaldo {
     Map<String, dynamic> toJson() => {
         "id": id,
         "id_uang": idUang,
-        "nominal_penarikan": nominalPenarikan,
-        "nominal_pengiriman": nominalPengiriman,
+        "nominal": nominal,
         "waktu_pengiriman": waktuPengiriman?.toIso8601String(),
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),

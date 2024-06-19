@@ -7,7 +7,7 @@ import 'package:pasar_petani/app/constant/constanta.dart';
 import '../data/model/user.dart';
 
 class UserService {
-  Future<User?> fetchUser() async {
+  Future<Users?> fetchUser() async {
     GetStorage storage = GetStorage();
     http.Response response = await http.get(
       Uri.parse('$apiUrl/user'),
@@ -18,7 +18,7 @@ class UserService {
       },
     );
     if (response.statusCode == 200) {
-      return User.fromJson(json.decode(response.body));
+      return Users.fromJson(json.decode(response.body));
     }
     return null;
   }
@@ -42,7 +42,8 @@ class UserService {
     }
     return false;
   }
-   Future<bool> changeProfile({
+
+  Future<bool> changeProfile({
     String? name,
     String? email,
     XFile? imageFile,
@@ -51,33 +52,36 @@ class UserService {
   }) async {
     GetStorage storage = GetStorage();
     try {
-      var url = "$apiUrl/permintaan/add";
+      var url = "$apiUrl/user/edit-profile";
       final request = http.MultipartRequest('POST', Uri.parse(url));
       request.headers['Authorization'] = 'Bearer ${storage.read('token')}';
       request.headers['Content-Type'] = 'multipart/form-data';
-      final file = await http.MultipartFile.fromPath(
-        'foto',
-        '${imageFile?.path}',
-      );
-      request.files.add(file);
-      request.fields['nama'] = "$name";
-      request.fields['email'] = "$name";
 
-      
+      if (imageFile != null) {
+        final file = await http.MultipartFile.fromPath(
+          'foto',
+          imageFile.path,
+        );
+        request.files.add(file);
+      }
 
-
-      request.fields['alamat'] = "$alamat";
-      request.fields['nomor_telepon'] = "$noHp";
+      if (name != null) request.fields['nama'] = name;
+      if (email != null) request.fields['email'] = email;
+      if (alamat != null) request.fields['alamat'] = alamat;
+      if (noHp != null) request.fields['nomor_telepon'] = noHp;
 
       final response = await request.send();
-      if (response.statusCode == 201) {
+      final responseString = await response.stream.bytesToString();
 
+      print('Response status: ${response.statusCode}');
+      print('Response body: $responseString');
+
+      if (response.statusCode == 201) {
         return true;
       }
       return false;
     } catch (e) {
-      throw Exception(e);
+      throw Exception('Failed to change profile: $e');
     }
   }
-
 }

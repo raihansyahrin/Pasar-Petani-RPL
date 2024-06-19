@@ -16,7 +16,7 @@ class AddProductController extends GetxController {
   TextEditingController duration = TextEditingController();
   TextEditingController weight = TextEditingController();
   XFile? file;
-  User? user;
+  Users? user;
   bool isSendProductSuccess = false;
   bool isLoading = false; // Add this line
 
@@ -116,7 +116,7 @@ class AddProductController extends GetxController {
         berat: berat,
         harga: harga,
         durasiTahan: duration.text,
-        idKoperasi: 19,
+        idKoperasi: 73,
         idPetani: user!.id,
         jumlah: jumlahValue,
         description: description.text,
@@ -127,6 +127,7 @@ class AddProductController extends GetxController {
       if (isSuccess) {
         clearInputs();
         Get.toNamed(Routes.BOTTOM_NAVIGATION_BAR);
+
         Get.snackbar(
           "Berhasil menambah",
           "Berhasil menambah permintaan",

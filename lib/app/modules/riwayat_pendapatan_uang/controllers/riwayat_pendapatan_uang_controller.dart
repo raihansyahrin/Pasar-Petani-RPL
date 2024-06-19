@@ -4,7 +4,7 @@ import 'package:pasar_petani/app/services/saldo_service.dart';
 
 class RiwayatPendapatanUangController extends GetxController {
   List<HistorySaldo> historyPendapatanUang = [];
-  bool isLoading = true;
+  bool isLoading = false;
 
   @override
   void onInit() {
@@ -13,6 +13,7 @@ class RiwayatPendapatanUangController extends GetxController {
   }
 
   Future<void> fetchAllHistorySaldo() async {
+    isLoading = true;
     historyPendapatanUang = await SaldoService().getHistorySaldo();
     isLoading = false;
     update();

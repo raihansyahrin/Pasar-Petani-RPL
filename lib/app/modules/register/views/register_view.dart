@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:get/get.dart';
 import 'package:pasar_petani/app/routes/app_pages.dart';
 import 'package:pasar_petani/app/shared/theme/color.dart';
-
 import '../../../shared/theme/font.dart';
 import '../controllers/register_controller.dart';
 
@@ -23,6 +20,7 @@ class RegisterView extends GetView<RegisterController> {
             ),
           ),
           SingleChildScrollView(
+            reverse: true,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Form(
               key: controller.formKey,

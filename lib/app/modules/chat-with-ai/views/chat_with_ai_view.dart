@@ -61,6 +61,7 @@ class _ChatPageState extends State<ChatPage> {
               children: [
                 Expanded(
                   child: TextField(
+                    autocorrect: false,
                     controller: messageController,
                     decoration: const InputDecoration(
                       hintText: 'Type a message...',

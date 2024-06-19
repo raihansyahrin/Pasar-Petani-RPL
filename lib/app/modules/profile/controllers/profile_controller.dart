@@ -6,7 +6,7 @@ import '../../../routes/app_pages.dart';
 import '../../../services/user_service.dart';
 
 class ProfileController extends GetxController {
-  User? user;
+  Users? user;
   bool? isLoading = false;
   @override
   void onInit() {

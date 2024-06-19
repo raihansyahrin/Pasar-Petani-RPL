@@ -55,9 +55,10 @@ class ProfileView extends GetView<ProfileController> {
                           title: "Email",
                           subtitle: controller.user?.email ?? "",
                         ),
-                        ProfileListTile(
+                        const ProfileListTile(
                           title: "Alamat",
-                          subtitle: controller.user?.alamat ?? "",
+                          // subtitle: controller.user?.alamat ?? "",
+                          subtitle: 'Jl.Sukabirus No.3, Bojongsoang',
                         ),
                         const SizedBox(
                           height: 16,

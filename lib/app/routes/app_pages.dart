@@ -8,8 +8,6 @@ import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/change_profile/bindings/change_profile_binding.dart';
 import '../modules/change_profile/views/change_profile_view.dart';
-import '../modules/chat-with-ai/bindings/chat_with_ai_binding.dart';
-import '../modules/chat-with-ai/views/chat_with_ai_view.dart';
 import '../modules/detail_permintaan/bindings/detail_permintaan_binding.dart';
 import '../modules/detail_permintaan/views/detail_permintaan_view.dart';
 import '../modules/home/bindings/home_binding.dart';

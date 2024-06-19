@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:path/path.dart' as path;
 
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -36,51 +35,6 @@ class PermintaanService {
     }
   }
 
-  // Future<bool> addPermintaan({
-  //   String? name,
-  //   int? idPetani,
-  //   int? idKoperasi,
-  //   String? kategori,
-  //   XFile? imageFile,
-  //   int? harga,
-  //   int? berat,
-  //   String? durasiTahan,
-  //   int? jumlah,
-  //   String? description,
-  // }) async {
-  //   GetStorage storage = GetStorage();
-  //   try {
-  //     var url = "$apiUrl/permintaan/add";
-  //     final request = http.MultipartRequest('POST', Uri.parse(url));
-  //     request.headers['Authorization'] = 'Bearer ${storage.read('token')}';
-  //     request.headers['Content-Type'] = 'multipart/form-data';
-  //     final file = await http.MultipartFile.fromPath(
-  //       'foto',
-  //       '${imageFile?.path}',
-  //     );
-  //     request.files.add(file);
-  //     request.fields['id_petani'] = "$idPetani";
-  //     request.fields['id_koperasi'] = "$idKoperasi";
-  //     request.fields['kategori'] = "$kategori";
-  //     request.fields['harga'] = "$harga";
-  //     request.fields['berat'] = "$berat";
-  //     request.fields['durasi_tahan'] = "$durasiTahan";
-
-  //     request.fields['jumlah'] = "$jumlah";
-  //     request.fields['name'] = "$name";
-  //     request.fields['description'] = "$description";
-
-  //     final response = await request.send();
-
-  //     if (response.statusCode == 201) {
-  //       print(response.stream.toBytes());
-  //       return true;
-  //     }
-  //     return false;
-  //   } catch (e) {
-  //     throw Exception(e);
-  //   }
-  // }
   Future<bool> addPermintaan({
     String? name,
     int? idPetani,

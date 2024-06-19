@@ -11,9 +11,9 @@ import '../../../shared/theme/color.dart';
 import '../../../shared/theme/font.dart';
 
 class HomeController extends GetxController {
-  User? user;
+  Users? user;
   Saldo? saldo;
-  bool isLoading = true;
+  bool isLoading = false;
   bool isLessThanSaldo = false;
   final formKey = GlobalKey<FormState>();
   TextEditingController penarikanController = TextEditingController();
@@ -30,29 +30,47 @@ class HomeController extends GetxController {
   }
 
   @override
-  onInit() async {
-    await fetchUser();
-    await fetchSaldo();
-    fetchStatistic();
+  void onInit() {
     super.onInit();
+    fetchUser();
+    fetchSaldo();
+    fetchStatistic();
   }
+  // @override
+  // onInit() async {
+  //   await fetchUser();
+  //   await fetchSaldo();
+  //   fetchStatistic();
+  //   super.onInit();
+  // }
 
   Future<void> fetchUser() async {
+    isLoading = true;
+    update();
     user = await UserService().fetchUser();
+
+    isLoading = false;
     update();
   }
 
   Future<void> fetchSaldo() async {
-    saldo = await SaldoService().fetchSaldo();
+    isLoading = true;
     update();
+    saldo = await SaldoService().fetchSaldo();
+    isLoading = false;
+    update();
+    // update();
   }
 
   Future<void> penarikan() async {
     if (await SaldoService().penarikan(
-      idUang: saldo?.id ?? 0,
+      idUang: saldo!.id ?? 0,
       nominal: penarikanController.text,
     )) {
+      fetchSaldo();
+      update();
       Get.back();
+
       Get.defaultDialog(
         title: '',
         titlePadding: const EdgeInsets.only(
@@ -109,6 +127,8 @@ class HomeController extends GetxController {
   }
 
   void fetchStatistic() async {
+    isLoading = true;
+    update();
     statistik = await PermintaanService().getStatistic();
     isLoading = false;
     update();

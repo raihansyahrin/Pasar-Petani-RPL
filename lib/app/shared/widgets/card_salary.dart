@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-import '../../helpers/concurrency_format.dart';
 import '../../routes/app_pages.dart';
 import '../theme/color.dart';
 import '../theme/font.dart';
 
 class CardSalary extends StatelessWidget {
-  final int? salary;
+  final String? saldo;
   final void Function()? onPressed;
   const CardSalary({
     super.key,
-    this.salary = 0,
+    required this.saldo,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    int saldoInt = int.parse(saldo!);
+    var formattedSaldo = NumberFormat.decimalPattern('id_ID').format(saldoInt);
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -53,8 +56,10 @@ class CardSalary extends StatelessWidget {
             //   style: bodyRegular,
             // ),
             subtitle: Text(
-              salary != null
-                  ? CurrencyFormat.formatCurrency(salary!)
+              saldo != null
+                  // ? CurrencyFormat.formatCurrency(saldo).toString()sa
+                  // ? 'Rp${saldo!}'
+                  ? 'Rp$formattedSaldo'
                   : "Belum ada",
               style: bodyRegular,
             ),
@@ -82,7 +87,8 @@ class CardSalary extends StatelessWidget {
             height: 44,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: salary == null ? onPressed : null,
+              // onPressed: salary == null ? onPressed : null,
+              onPressed: onPressed,
               child: Text(
                 'Tarik Pendapatan',
                 style: buttonLinkLRegular.copyWith(

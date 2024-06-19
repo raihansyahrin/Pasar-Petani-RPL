@@ -21,6 +21,7 @@ class ChangeProfileController extends GetxController {
 
   void changeProfile() async {
     if (await UserService().changeProfile(
+      imageFile: file!,
       name: nameTextEditingController.text,
       email: emailTextEditingController.text,
       noHp: nomorHpTextEditingController.text,

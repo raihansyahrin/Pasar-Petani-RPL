@@ -1,39 +1,39 @@
 // To parse this JSON data, do
 //
-//     final user = userFromJson(jsonString);
+//     final Users = UsersFromJson(jsonString);
 
 import 'dart:convert';
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+Users UsersFromJson(String str) => Users.fromJson(json.decode(str));
 
-String userToJson(User data) => json.encode(data.toJson());
+String UsersToJson(Users data) => json.encode(data.toJson());
 
-class User {
-    int? id;
-    String? nama;
-    String? email;
-    String? alamat;
-    String? foto;
-    String? noHp;
-    String? role;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    String? fotoUrl;
+class Users {
+  int? id;
+  String? nama;
+  String? email;
+  String? alamat;
+  String? foto;
+  String? noHp;
+  String? role;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? fotoUrl;
 
-    User({
-        this.id,
-        this.nama,
-        this.email,
-        this.alamat,
-        this.foto,
-        this.noHp,
-        this.role,
-        this.createdAt,
-        this.updatedAt,
-        this.fotoUrl,
-    });
+  Users({
+    this.id,
+    this.nama,
+    this.email,
+    this.alamat,
+    this.foto,
+    this.noHp,
+    this.role,
+    this.createdAt,
+    this.updatedAt,
+    this.fotoUrl,
+  });
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
         id: json["id"],
         nama: json["nama"],
         email: json["email"],
@@ -41,12 +41,16 @@ class User {
         foto: json["foto"],
         noHp: json["no_hp"],
         role: json["role"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
         fotoUrl: json["foto_url"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "nama": nama,
         "email": email,
@@ -57,5 +61,5 @@ class User {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "foto_url": fotoUrl,
-    };
+      };
 }

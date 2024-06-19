@@ -60,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                                   height: 22,
                                 ),
                                 CardSalary(
-                                  salary: controller.saldo?.saldo,
+                                  saldo: controller.saldo?.saldo,
                                   onPressed: () {
                                     bottomSheet();
                                   },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:pasar_petani/app/modules/home/controllers/home_controller.dart';
 import 'package:pasar_petani/app/modules/product/controllers/product_controller.dart';
 import 'package:pasar_petani/app/modules/riwayat/controllers/riwayat_controller.dart';

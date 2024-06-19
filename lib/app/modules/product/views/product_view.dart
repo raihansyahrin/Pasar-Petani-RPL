@@ -172,20 +172,16 @@ class ProductView extends GetView<ProductController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: ClipRRect(
                                               borderRadius:
-                                                  const BorderRadius.only(
-                                                topRight: Radius.circular(16),
-                                                topLeft: Radius.circular(16),
-                                              ),
-                                              color: primaryShade1,
-                                            ),
-                                            width: double.infinity,
-                                            child: Center(
+                                                  const BorderRadius.vertical(
+                                                      top: Radius.circular(16)),
                                               child: Image.network(
                                                 data.fotoUrl ?? "",
                                                 height: 120,
+                                                fit: BoxFit.fill,
                                                 loadingBuilder: (context, child,
                                                     loadingProgress) {
                                                   if (loadingProgress == null) {
